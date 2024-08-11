@@ -1,0 +1,38 @@
+<div class="auth-container">
+  <h2>{{ isSignUp ? 'Sign Up' : 'Login' }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #authForm="ngForm">
+    <div>
+      <label for="username">{{ isSignUp ? 'Create a Username' : 'Username' }}:</label>
+      <input type="text" id="username" required [(ngModel)]="username" name="username" #usernameField="ngModel" />
+      <div *ngIf="usernameField.invalid && (usernameField.dirty || usernameField.touched)">
+        <small class="error" *ngIf="usernameField.errors?.['required']">{{ isSignUp ? 'Username is required' : 'Username is required' }}</small>
+      </div>
+    </div>
+
+    <div>
+      <label for="password">{{ isSignUp ? 'Create a Password' : 'Password' }}:</label>
+      <input type="password" id="password" required [(ngModel)]="password" name="password" #passwordField="ngModel" />
+      <div *ngIf="passwordField.invalid && (passwordField.dirty || passwordField.touched)">
+        <small class="error" *ngIf="passwordField.errors?.['required']">{{ isSignUp ? 'Password is required' : 'Password is required' }}</small>
+      </div>
+    </div>
+
+    <div *ngIf="isSignUp">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" required [(ngModel)]="confirmPassword" name="confirmPassword" #confirmPasswordField="ngModel" />
+      <div *ngIf="confirmPasswordField.invalid && (confirmPasswordField.dirty || confirmPasswordField.touched)">
+        <small class="error" *ngIf="confirmPasswordField.errors?.['required']">Confirmation is required</small>
+      </div>
+    </div>
+
+    <button type="submit">{{ isSignUp ? 'Sign Up' : 'Login' }}</button>
+
+    <p *ngIf="!isSignUp">Don't have an account? <a (click)="toggleForm(true)">Sign Up</a></p>
+    <p *ngIf="isSignUp">Already have an account? <a (click)="toggleForm(false)">Login</a></p>
+  </form>
+
+  <div *ngIf="authError" class="auth-error">
+    {{ authError }}
+  </div>
+</div>
