@@ -52,3 +52,4 @@ export class LoginComponent {
     this.confirmPassword = ''; // Reset confirmPassword when switching forms
   }
 }
+//hehe
